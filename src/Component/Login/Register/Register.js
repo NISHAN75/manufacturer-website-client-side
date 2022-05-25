@@ -1,23 +1,21 @@
-import React, { useRef, useState } from "react";
-import { useAuthState, useSignInWithEmailAndPassword, useSignInWithGoogle } from "react-firebase-hooks/auth";
+import React from "react";
+import { useCreateUserWithEmailAndPassword, useSignInWithGoogle } from "react-firebase-hooks/auth";
 import useAuth from "../../../hooks/useAuth";
 import { useForm } from "react-hook-form";
 import Loading from "../../Pages/Shared/Loading";
 import { Link, useNavigate } from "react-router-dom";
-import { useSendPasswordResetEmail } from 'react-firebase-hooks/auth';
-import { toast } from "react-toastify";
+import { useSendEmailVerification } from 'react-firebase-hooks/auth';
 
-const Login = () => {
-  const [email,setEmail]=useState('')
+const Register = () => {
   const [auth] = useAuth();
   const [signInWithGoogle, gUser, gLoading, gError] = useSignInWithGoogle(auth);
   const [
-    signInWithEmailAndPassword,
+    createUserWithEmailAndPassword,
     user,
     loading,
     error,
-  ] = useSignInWithEmailAndPassword(auth);
-  const [sendPasswordResetEmail, ResetSending, ResetError] = useSendPasswordResetEmail(
+  ] = useCreateUserWithEmailAndPassword(auth);
+  const [sendEmailVerification, verifySending, verifyError] = useSendEmailVerification(
     auth
   );
   const {
@@ -25,39 +23,58 @@ const Login = () => {
     formState: { errors },
     handleSubmit,
   } = useForm();
-  const onSubmit = (data) =>{
-    setEmail(data.email)
-    signInWithEmailAndPassword(data.email, data.password)
-    
+  const onSubmit = async(data) =>{
+    console.log(data)
+    await createUserWithEmailAndPassword(data.email, data.password);
+    await sendEmailVerification();
+    alert("Please Verify Your Email")
   }
   const navigate=useNavigate();
   let errorElement;
-  if(error || gError || ResetError){
-    errorElement =<p className="text-red-500 mb-5"><small>{error?.message || gError?.message || ResetError?.message}</small></p>
+  if(error || gError || verifyError){
+    errorElement =<p className="text-red-500 mb-5"><small>{error?.message || gError?.message || verifyError?.message}</small></p>
   }
-  if(loading || gLoading || ResetSending){
+  if(loading || gLoading || verifySending){
     return <Loading></Loading>
   }
+  
   if (user || gUser) {
     navigate('/home')
-  }
-  const resetEmail = async(email)=>{
-   
-    await sendPasswordResetEmail(email);
-    if(email){
-      toast('Sent email');
-    }
-    
-
   }
 
   return (
     <section className=" flex h-screen justify-center items-center">
       <div class="card card-compact w-96 shadow-xl">
         <div class="card-body w-full">
-          <h2 class="card-title  justify-center mb-10 text-primary">Please Login</h2>
+          <h2 class="card-title  justify-center mb-10">Please Register</h2>
           <div class="card-actions justify-center">
             <form onSubmit={handleSubmit(onSubmit)}>
+              <div class="form-control w-80 max-w-xs">
+                <label class="label">
+                  <span class="label-text">Name</span>
+                </label>
+                <input
+                  type="text"
+                  placeholder="Enter Your Name"
+                  class="input input-bordered w-full"
+                  {...register(
+                    "name",
+                    {
+                      required: {
+                        value: true,
+                        message: "Name Required",
+                      }
+                    }
+                  )}
+                />
+                <label class="label">
+                  {errors.name?.type === "required" && (
+                    <span class="label-text-alt text-red-500">
+                      {errors.name.message}
+                    </span>
+                  )}
+                </label>
+              </div>
               <div class="form-control w-80 max-w-xs">
                 <label class="label">
                   <span class="label-text">Email</span>
@@ -131,11 +148,10 @@ const Login = () => {
               <input
                 className="btn my-3 btn-primary px-10 w-full max-w-xs  text-white hover:bg-white hover:text-black"
                 type="submit"
-                value="Login"
+                value="Register"
               />
             </form>
-            <p className="text-xl text-primary text-center"><small><Link to="/register">You hava No account ? Please Register</Link></small></p>
-            <p className="text-xl text-primary text-center" onClick={()=> resetEmail(email)}><small>Reset Your Password?</small></p>
+            <p className="text-xl text-primary text-center"><small><Link to="/login">Already Have a Account? please Login</Link></small></p>
             <div class="flex flex-col w-full border-opacity-50">
               <div class="divider">OR</div>
               <button
@@ -152,4 +168,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default Register;
