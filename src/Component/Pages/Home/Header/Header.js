@@ -5,9 +5,9 @@ const Header = () => {
   return (
     <div class="navbar bg-base-100">
       <div class="navbar-start">
-        <a class="btn btn-ghost normal-case text-2xl bg-emerald-400 text-white">
-          CarPlus
-        </a>
+        <span class="text-3xl font-bold text-emerald-400 ">
+        BicyclePlus
+        </span>
       </div>
       <div class="navbar-center hidden lg:flex">
         <ul class="menu menu-horizontal p-0">

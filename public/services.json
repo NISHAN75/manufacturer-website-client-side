@@ -1,3 +1,82 @@
 [
-  {}
+  {
+    "img":"https://images.pexels.com/photos/8936923/pexels-photo-8936923.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+    "name":"Front derailleur",
+    "description":" I realize that two years is not a long time. I realize that even ten years is not a long time. But when it seems insurmountable",
+    "minimum":"100",
+    "available":"1000",
+    "price":"400"
+  },
+  {
+    "img":"https://images.pexels.com/photos/8936923/pexels-photo-8936923.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+    "name":"Front derailleur",
+    "description":" I realize that two years is not a long time. I realize that even ten years is not a long time. But when it seems insurmountable",
+    "minimum":"100",
+    "available":"1000",
+    "price":"400"
+  },
+  {
+    "img":"https://images.pexels.com/photos/8936923/pexels-photo-8936923.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+    "name":"Front derailleur",
+    "description":" I realize that two years is not a long time. I realize that even ten years is not a long time. But when it seems insurmountable",
+    "minimum":"100",
+    "available":"1000",
+    "price":"400"
+  },
+  {
+    "img":"https://images.pexels.com/photos/8936923/pexels-photo-8936923.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+    "name":"Front derailleur",
+    "description":" I realize that two years is not a long time. I realize that even ten years is not a long time. But when it seems insurmountable",
+    "minimum":"100",
+    "available":"1000",
+    "price":"400"
+  },
+  {
+    "img":"https://images.pexels.com/photos/8936923/pexels-photo-8936923.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+    "name":"Front derailleur",
+    "description":" I realize that two years is not a long time. I realize that even ten years is not a long time. But when it seems insurmountable",
+    "minimum":"100",
+    "available":"1000",
+    "price":"400"
+  },
+  {
+    "img":"https://images.pexels.com/photos/8936923/pexels-photo-8936923.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+    "name":"Front derailleur",
+    "description":" I realize that two years is not a long time. I realize that even ten years is not a long time. But when it seems insurmountable",
+    "minimum":"100",
+    "available":"1000",
+    "price":"400"
+  },
+  {
+    "img":"https://images.pexels.com/photos/8936923/pexels-photo-8936923.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+    "name":"Front derailleur",
+    "description":" I realize that two years is not a long time. I realize that even ten years is not a long time. But when it seems insurmountable",
+    "minimum":"100",
+    "available":"1000",
+    "price":"400"
+  },
+  {
+    "img":"https://images.pexels.com/photos/8936923/pexels-photo-8936923.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+    "name":"Front derailleur",
+    "description":" I realize that two years is not a long time. I realize that even ten years is not a long time. But when it seems insurmountable",
+    "minimum":"100",
+    "available":"1000",
+    "price":"400"
+  },
+  {
+    "img":"https://images.pexels.com/photos/8936923/pexels-photo-8936923.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+    "name":"Front derailleur",
+    "description":" I realize that two years is not a long time. I realize that even ten years is not a long time. But when it seems insurmountable",
+    "minimum":"100",
+    "available":"1000",
+    "price":"400"
+  },
+  {
+    "img":"https://images.pexels.com/photos/8936923/pexels-photo-8936923.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+    "name":"Front derailleur",
+    "description":" I realize that two years is not a long time. I realize that even ten years is not a long time. But when it seems insurmountable",
+    "minimum":"100",
+    "available":"1000",
+    "price":"400"
+  }
 ]
