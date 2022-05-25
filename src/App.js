@@ -10,6 +10,8 @@ import Register from './Component/Login/Register/Register';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import PartDetalis from './Component/Pages/Home/PartDetalis/PartDetalis';
+import RequireAuth from './hooks/RequireAuth';
+import DashBoard from './Component/Pages/DashBoard/DashBoard';
 
 function App() {
   return (
@@ -18,7 +20,12 @@ function App() {
       <Routes>
         <Route path='/' element={<Home></Home>}></Route>
         <Route path='/home' element={<Home></Home>}></Route>
-        <Route path='/services/:id' element={<PartDetalis></PartDetalis>}></Route>
+        <Route path='/services/:id' element={
+          <RequireAuth>
+            <PartDetalis></PartDetalis>
+            </RequireAuth>
+        }></Route>
+        <Route path='/dashBoard' element={<DashBoard></DashBoard>}></Route>
         <Route path='/login' element={<Login></Login>}></Route>
         <Route path='/register' element={<Register></Register>}></Route>
       </Routes>

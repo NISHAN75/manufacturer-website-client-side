@@ -1,5 +1,5 @@
 import React from "react";
-import { useCreateUserWithEmailAndPassword, useSignInWithGoogle } from "react-firebase-hooks/auth";
+import { useCreateUserWithEmailAndPassword, useSignInWithGoogle,useUpdateProfile  } from "react-firebase-hooks/auth";
 import useAuth from "../../../hooks/useAuth";
 import { useForm } from "react-hook-form";
 import Loading from "../../Pages/Shared/Loading";
@@ -15,26 +15,31 @@ const Register = () => {
     loading,
     error,
   ] = useCreateUserWithEmailAndPassword(auth);
+  const [updateProfile, updatingLoading, updateError] = useUpdateProfile(auth);
   const [sendEmailVerification, verifySending, verifyError] = useSendEmailVerification(
     auth
   );
   const {
     register,
     formState: { errors },
+    reset,
     handleSubmit,
   } = useForm();
   const onSubmit = async(data) =>{
-    console.log(data)
-    await createUserWithEmailAndPassword(data.email, data.password);
+    console.log(data);
+    const displayName = data.name
+    await createUserWithEmailAndPassword(data.email, data.password,data.name);
     await sendEmailVerification();
+    await updateProfile({displayName});
     alert("Please Verify Your Email")
+    reset();
   }
   const navigate=useNavigate();
   let errorElement;
-  if(error || gError || verifyError){
-    errorElement =<p className="text-red-500 mb-5"><small>{error?.message || gError?.message || verifyError?.message}</small></p>
+  if(error || gError || verifyError || updateError){
+    errorElement =<p className="text-red-500 mb-5"><small>{error?.message || gError?.message || verifyError?.message || updateError?.message}</small></p>
   }
-  if(loading || gLoading || verifySending){
+  if(loading || gLoading || verifySending || updatingLoading){
     return <Loading></Loading>
   }
   

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useForm } from "react-hook-form";
 import { useParams } from "react-router-dom";
+import { toast } from "react-toastify";
 import useAuth from "../../../../hooks/useAuth";
 
 const PartDetalis = () => {
@@ -19,13 +20,42 @@ const PartDetalis = () => {
   const {
     register,
     formState: { errors },
-    handleSubmit,
-  } = useForm();
+    handleSubmit,reset 
+  } = useForm({mode: 'onChange'});
   const onSubmit = async(data) =>{
-    console.log(data)
-  }
+    console.log(data);
+    const availableQuantity=parseInt(part.available)
+    const minimumQuantity=parseInt(part.minimum)
+    const inputQuantity=parseInt(data.quantity)
+    if(minimumQuantity > inputQuantity ){
+       alert('Please Enter minimum Order')
+    }
+    else if(availableQuantity < inputQuantity){
+      alert('You Have no Parts You want please enter valid Quantity')
+    }
+    const orders= {
+      partId: part._id,
+      partName: part.name,
+      quantity: data.quantity,
+      user:user?.displayName,
+      userEmail:user?.email,
+      userPhone:data.phone
+    }
+    fetch('http://localhost:5000/orders',{
+      method: 'POST',
+      headers:{
+        'content-type': 'application/json'
+      },
+      body: JSON.stringify(orders)
+    })
+    .then(res => res.json())
+    .then(data => {
+      console.log(data);
+      toast('congratulations! Your Order Successfully')
+    })
 
-  console.log(part);
+    reset() 
+  }
   return (
     <section className="grid grid-cols-1 lg:grid-cols-2 px-20 gap-10 justify-center my-20">
       <div class="card card-compact w-96 h-4/5 mt-40 text-left shadow-xl flex">
@@ -66,18 +96,12 @@ const PartDetalis = () => {
                 </label>
                 <input
                   type="text"
+                  value={user?.displayName}
+                  readOnly
+                  disabled
                   placeholder="Enter Your Name"
                   
                   class="input input-bordered w-full"
-                  {...register(
-                    "name",
-                    {
-                      required: {
-                        value: true,
-                        message: "Name Required",
-                      }
-                    }
-                  )}
                 />
                 <label class="label">
                   {errors.name?.type === "required" && (
@@ -94,6 +118,8 @@ const PartDetalis = () => {
                 <input
                   type="email"
                   value={user?.email}
+                  readOnly
+                  disabled
                   placeholder="Enter Your Email"
                   class="input input-bordered w-full"
                 />
@@ -146,7 +172,7 @@ const PartDetalis = () => {
               </div>
               <div class="form-control w-80 max-w-xs">
                 <label class="label">
-                  <span class="label-text">Quantity</span>
+                  <span class="label-text">Enter Quantity</span>
                 </label>
                 <input
                   type="phone"

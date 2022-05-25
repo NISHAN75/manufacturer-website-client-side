@@ -23,11 +23,13 @@ const Login = () => {
   const {
     register,
     formState: { errors },
+    reset,
     handleSubmit,
   } = useForm();
   const onSubmit = (data) =>{
     setEmail(data.email)
-    signInWithEmailAndPassword(data.email, data.password)
+    signInWithEmailAndPassword(data.email, data.password);
+    reset();
     
   }
   const navigate=useNavigate();
