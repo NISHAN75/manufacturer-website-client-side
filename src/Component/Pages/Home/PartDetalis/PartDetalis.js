@@ -17,54 +17,60 @@ const PartDetalis = () => {
   }, []);
   const [auth]=useAuth();
   const [user] =useAuthState(auth);
-  console.log(user);
   const {
     register,
     formState: { errors },
     handleSubmit,reset 
   } = useForm({mode: 'onChange'});
   const onSubmit = async(data) =>{
-    console.log(data);
     const availableQuantity=parseInt(part.available)
     const minimumQuantity=parseInt(part.minimum)
     const inputQuantity=parseInt(data.quantity)
     if(minimumQuantity > inputQuantity ){
-       alert('Please Enter minimum Order')
+       return  alert('Please Enter minimum Order')
     }
     else if(availableQuantity < inputQuantity){
-      alert('You Have no Parts You want please enter valid Quantity')
+     return alert('You Have no Parts You want please enter valid Quantity')
     }
-    const orders= {
-      partId: part._id,
-      partName: part.name,
-      quantity: data.quantity,
-      user:user?.displayName,
-      userEmail:user?.email,
-      userPhone:data.phone
+    else if(availableQuantity > inputQuantity || minimumQuantity < inputQuantity ){
+      const orders= {
+        partId: part._id,
+        partName: part.name,
+        quantity: data.quantity,
+        user:user?.displayName,
+        userEmail:user?.email,
+        userPhone:data.phone
+      }
+      fetch('http://localhost:5000/orders',{
+        method: 'POST',
+        headers:{
+          'content-type': 'application/json'
+        },
+        body: JSON.stringify(orders)
+      })
+      .then(res => res.json())
+      .then(data => {
+        console.log(data);
+        if(data.success){
+          toast.success(`congratulations! Your ${part.name} parts Order Successfully`)
+          // navigate('/home')
+        }
+        else{
+          toast.error(`This Order already declare!! 
+          check  My Order page search parts field ${part.name} .Please Try another?`)
+        }
+       
+      })
     }
-    fetch('http://localhost:5000/orders',{
-      method: 'POST',
-      headers:{
-        'content-type': 'application/json'
-      },
-      body: JSON.stringify(orders)
-    })
-    .then(res => res.json())
-    .then(data => {
-      console.log(data);
-      if(data.success){
-        toast.success(`congratulations! Your ${part.name} parts Order Successfully`)
-        navigate('/home')
-      }
-      else{
-        toast.error(`This Order already declare!! 
-        check  My Order page search parts field ${part.name} .Please Try another?`)
-      }
-     
-    })
-
+    const PartQuantity=parseInt(part.quantity);
+    const inputFiledQuantity=parseInt(data.quantity);
+    const  newAvailableQuantity=PartQuantity - inputFiledQuantity;
+    console.log(newAvailableQuantity);
     reset() 
   }
+
+
+
   return (
     <section className="grid grid-cols-1 lg:grid-cols-2 px-20 gap-10 justify-center my-20">
       <div class="card card-compact w-96 h-4/5 mt-40 text-left shadow-xl flex">
@@ -184,7 +190,8 @@ const PartDetalis = () => {
                   <span class="label-text">Enter Quantity</span>
                 </label>
                 <input
-                  type="phone"
+                  type="number"
+                  name="quantity"
                   placeholder="Enter Your Quantity"
                   class="input input-bordered w-full"
                   {...register("quantity", {

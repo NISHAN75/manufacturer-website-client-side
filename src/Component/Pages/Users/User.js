@@ -2,7 +2,7 @@ import React from "react";
 import { Table, Thead, Tbody, Tr, Th, Td } from "react-super-responsive-table";
 import { toast } from "react-toastify";
 
-const User = ({ user , index ,refetch }) => {
+const User = ({ user , index ,refetch,setRemoveUser }) => {
   const {email,role}=user;
   const makeAdmin = ()=>{
   fetch(`http://localhost:5000/user/admin/${email}`,{
@@ -25,6 +25,27 @@ const User = ({ user , index ,refetch }) => {
   })
 
   }
+  const handleDelete = (email) => {
+    const agree = window.confirm("Are You sure want to Delete This Orders");
+    if (agree) {
+      console.log("click", email);
+      const url = `http://localhost:5000/user/${user.email}`;
+      fetch(url, {
+        method: "DELETE",
+        headers:{
+          authorization: `Bearer ${localStorage.getItem('accessToken')}`
+        }
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          if (data.deletedCount) {
+            toast.success('Remove This user')
+           refetch()
+            
+          }
+        });
+    }
+  };
   return (
     <Tr className=" hover:bg-primary hover:text-white font-bold border-b-4 border-primary">
       <Th>{index + 1}</Th>
@@ -33,7 +54,10 @@ const User = ({ user , index ,refetch }) => {
           Make admin
         </button>}</Td>
       <Td class="p-8">
-        <button class="btn bg-red-500  hover:bg-white hover:text-black">Remove User</button>
+      <label onClick={()=> setRemoveUser(user)} for="Delete-conform" class="btn btn-error btn-xs">
+      Remove User
+      </label>
+        <button onClick={ () =>handleDelete(user.email)} class="btn bg-red-500  hover:bg-white hover:text-black">Remove User</button>
       </Td>
     </Tr>
   );

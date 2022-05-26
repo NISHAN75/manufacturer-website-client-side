@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import useAuth from '../../../hooks/useAuth';
 import { signOut } from "firebase/auth";
-import { Table, Thead, Tbody, Tr, Th, Td } from 'react-super-responsive-table';
+import { Table, Thead, Tbody, Tr, Th } from 'react-super-responsive-table';
 import 'react-super-responsive-table/dist/SuperResponsiveTableStyle.css';
 import SingleOrder from './SingleOrder';
 import { useNavigate } from 'react-router-dom';
@@ -25,7 +25,6 @@ const OrderReview = () => {
         })
         
       .then(res => {
-        console.log('res',res);
         if(res.status ===401 || res.status === 403){
           signOut(auth);
           localStorage.removeItem('accessToken');
@@ -34,12 +33,30 @@ const OrderReview = () => {
         return res.json()
       })
       .then(data => {
-        console.log(data)
         setOrders(data)
       })
       }
     }
-    ,[user])
+    ,[user]);
+    const handleDelete = (partId) => {
+      const agree = window.confirm("Are You sure want to Delete This Orders");
+      if (agree) {
+        console.log("click", partId);
+        const url = `http://localhost:5000/orders?email=${user.email}`;
+        fetch(url, {
+          method: "DELETE",
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            if (data.deletedCount > 0) {
+              console.log('hi');
+              const remaining = orders.filter((order) => order.partId !== partId );
+              console.log(remaining);
+              setOrders(remaining);
+            }
+          });
+      }
+    };
   return (
     <div>
       <h1 className="text-center font-bold text-3xl text-primary mt-5">Your Order : {orders.length}</h1>
@@ -55,7 +72,7 @@ const OrderReview = () => {
       </Thead>
       <Tbody>
         {
-          orders.map((order,index) => <SingleOrder index={index} key={order._id} order={order}></SingleOrder>)
+          orders.map((order,index) => <SingleOrder handleDelete={handleDelete} index={index} key={order._id} order={order}></SingleOrder>)
         }
          </Tbody>
     </Table>
