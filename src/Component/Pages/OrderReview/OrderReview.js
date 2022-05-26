@@ -50,7 +50,7 @@ const OrderReview = () => {
           <Th>User</Th>
           <Th>Parts Name</Th>
           <Th>Phone number</Th>
-          <Th>Quantity</Th>
+          <Th>Order Quantity</Th>
         </Tr>
       </Thead>
       <Tbody>

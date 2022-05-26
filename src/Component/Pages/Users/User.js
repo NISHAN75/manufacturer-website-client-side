@@ -33,7 +33,7 @@ const User = ({ user , index ,refetch }) => {
           Make admin
         </button>}</Td>
       <Td class="p-8">
-        <button class="btn bg-red-500  hover:bg-white">Remove User</button>
+        <button class="btn bg-red-500  hover:bg-white hover:text-black">Remove User</button>
       </Td>
     </Tr>
   );

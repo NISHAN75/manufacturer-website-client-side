@@ -11,6 +11,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import PartDetalis from './Component/Pages/Home/PartDetalis/PartDetalis';
 import RequireAuth from './hooks/RequireAuth';
+import RequireAdmin from './hooks/RequireAdmin';
 import DashBoard from './Component/Pages/DashBoard/DashBoard';
 import OrderReview from './Component/Pages/OrderReview/OrderReview';
 import ClientReview from './Component/Pages/OrderReview/ClientReview';
@@ -37,7 +38,7 @@ function App() {
          <Profile></Profile>
         }></Route>
           <Route path='users' element={
-         <Users></Users>
+         <RequireAdmin><Users></Users></RequireAdmin>
         }></Route>
           <Route index element={<OrderReview></OrderReview>}></Route>
           <Route path='review' element={<ClientReview></ClientReview>}></Route>
