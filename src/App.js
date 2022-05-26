@@ -33,6 +33,7 @@ function App() {
         }>
           <Route index element={<OrderReview></OrderReview>}></Route>
           <Route path='review' element={<ClientReview></ClientReview>}></Route>
+          <Route path='profile' element={<ClientReview></ClientReview>}></Route>
  
         </Route>
         <Route path='/login' element={<Login></Login>}></Route>

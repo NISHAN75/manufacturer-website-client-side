@@ -192,11 +192,6 @@ const Header = () => {
             />
           </svg>
         </label>
-        <label
-          for="dashBoard-sideBar"
-          class="btn btn-primary drawer-button lg:hidden"
-        >
-        </label>
       </div>
     </div>
   );
