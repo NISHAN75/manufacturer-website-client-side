@@ -14,6 +14,8 @@ import RequireAuth from './hooks/RequireAuth';
 import DashBoard from './Component/Pages/DashBoard/DashBoard';
 import OrderReview from './Component/Pages/OrderReview/OrderReview';
 import ClientReview from './Component/Pages/OrderReview/ClientReview';
+import Profile from './Component/Pages/Profile/Profile';
+import Users from './Component/Pages/Users/Users';
 
 
 function App() {
@@ -31,9 +33,15 @@ function App() {
         <Route path='/dashBoard' element={
           <RequireAuth><DashBoard></DashBoard></RequireAuth>
         }>
+          <Route path='profile' element={
+         <Profile></Profile>
+        }></Route>
+          <Route path='users' element={
+         <Users></Users>
+        }></Route>
           <Route index element={<OrderReview></OrderReview>}></Route>
           <Route path='review' element={<ClientReview></ClientReview>}></Route>
-          <Route path='profile' element={<ClientReview></ClientReview>}></Route>
+          
  
         </Route>
         <Route path='/login' element={<Login></Login>}></Route>

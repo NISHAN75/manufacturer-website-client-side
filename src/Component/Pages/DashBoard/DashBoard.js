@@ -23,6 +23,7 @@ const DashBoard = () => {
           </li>
           <li className="text-primary font-bold    hover:text-black mr-3 p-2">
             <Link to="/dashBoard/profile">My Profile</Link>
+            <Link to="/dashBoard/users">All User</Link>
           </li>
         </ul>
       </div>

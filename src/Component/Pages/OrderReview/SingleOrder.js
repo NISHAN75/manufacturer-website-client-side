@@ -1,13 +1,14 @@
 import React from "react";
 import {Tr, Td } from "react-super-responsive-table";
 
-const SingleOrder = ({ order }) => {
+const SingleOrder = ({ order ,index }) => {
   return (
-      <Tr className="hover:bg-primary hover:text-white font-bold">
-        <Td>{order?.user}</Td>
-        <Td>{order?.partName}</Td>
-        <Td>{order?.userPhone}</Td>
-        <Td>{order?.quantity}</Td>
+      <Tr className="p-20 hover:bg-primary hover:text-white font-bold border-b-4 border-primary">
+        <Td className="p-5">{index + 1}</Td>
+        <Td className="p-5">{order?.user}</Td>
+        <Td className="p-5">{order?.partName}</Td>
+        <Td className="p-5">{order?.userPhone}</Td>
+        <Td className="p-5">{order?.quantity}</Td>
       </Tr>
   );
 };

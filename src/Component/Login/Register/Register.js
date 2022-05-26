@@ -5,6 +5,7 @@ import { useForm } from "react-hook-form";
 import Loading from "../../Pages/Shared/Loading";
 import { Link, useNavigate } from "react-router-dom";
 import { useSendEmailVerification } from 'react-firebase-hooks/auth';
+import useToken from "../../../hooks/useToken";
 
 const Register = () => {
   const [auth] = useAuth();
@@ -35,6 +36,7 @@ const Register = () => {
     reset();
   }
   const navigate=useNavigate();
+  const [token]=useToken(user || gUser);
   let errorElement;
   if(error || gError || verifyError || updateError){
     errorElement =<p className="text-red-500 mb-5"><small>{error?.message || gError?.message || verifyError?.message || updateError?.message}</small></p>
@@ -43,7 +45,7 @@ const Register = () => {
     return <Loading></Loading>
   }
   
-  if (user || gUser) {
+  if (token) {
     navigate('/home')
   }
 

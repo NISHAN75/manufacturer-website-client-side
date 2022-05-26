@@ -1,11 +1,12 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useAuthState, useSignInWithEmailAndPassword, useSignInWithGoogle } from "react-firebase-hooks/auth";
 import useAuth from "../../../hooks/useAuth";
 import { useForm } from "react-hook-form";
 import Loading from "../../Pages/Shared/Loading";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useSendPasswordResetEmail } from 'react-firebase-hooks/auth';
 import { toast } from "react-toastify";
+import useToken from "../../../hooks/useToken";
 
 const Login = () => {
   const [email,setEmail]=useState('')
@@ -32,16 +33,22 @@ const Login = () => {
     reset();
     
   }
-  const navigate=useNavigate();
+  const [token] =useToken(user || gUser)
+  
   let errorElement;
+  let navigate = useNavigate();
+  let location = useLocation();
+  let from = location.state?.from?.pathname || "/";
+  useEffect( ()=>{
+    if (token) {
+      navigate(from, { replace: true });
+    }
+  } ,[token,from,navigate])
   if(error || gError || ResetError){
     errorElement =<p className="text-red-500 mb-5"><small>{error?.message || gError?.message || ResetError?.message}</small></p>
   }
   if(loading || gLoading || ResetSending){
     return <Loading></Loading>
-  }
-  if (user || gUser) {
-    navigate('/home')
   }
   const resetEmail = async(email)=>{
    
