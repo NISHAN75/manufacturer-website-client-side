@@ -8,7 +8,7 @@ module.exports = {
       {
         doctorThem: {
           primary: "#36D399",
-          secondary: "#FFFFFF",
+          secondary: "#00033E",
           accent: "#24272E",
           neutral: "#3d4451",
           "base-100": "#ffffff",

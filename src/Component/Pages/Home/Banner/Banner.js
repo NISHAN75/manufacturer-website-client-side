@@ -21,7 +21,7 @@ const Banner = () => {
             ride a bicycle too!
           </p>
           <button class="btn btn-primary mt-5 px-10 text-white hover:bg-white hover:text-black">
-            Warning
+          contact us  
           </button>
         </div>
       </div>
