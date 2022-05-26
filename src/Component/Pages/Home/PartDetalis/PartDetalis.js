@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useForm } from "react-hook-form";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import useAuth from "../../../../hooks/useAuth";
 
 const PartDetalis = () => {
   const { id } = useParams();
+  const navigate=useNavigate();
   const [part, setPart] = useState([]);
   useEffect(() => {
     const url = `http://localhost:5000/services/${id}`;
@@ -51,7 +52,15 @@ const PartDetalis = () => {
     .then(res => res.json())
     .then(data => {
       console.log(data);
-      toast('congratulations! Your Order Successfully')
+      if(data.success){
+        toast.success(`congratulations! Your ${part.name} parts Order Successfully`)
+        navigate('/home')
+      }
+      else{
+        toast.error(`This Order already declare!! 
+        check  My Order page search parts field ${part.name} .Please Try another?`)
+      }
+     
     })
 
     reset() 

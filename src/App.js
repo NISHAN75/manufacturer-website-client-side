@@ -13,6 +13,7 @@ import PartDetalis from './Component/Pages/Home/PartDetalis/PartDetalis';
 import RequireAuth from './hooks/RequireAuth';
 import DashBoard from './Component/Pages/DashBoard/DashBoard';
 
+
 function App() {
   return (
     <div>
@@ -25,7 +26,10 @@ function App() {
             <PartDetalis></PartDetalis>
             </RequireAuth>
         }></Route>
-        <Route path='/dashBoard' element={<DashBoard></DashBoard>}></Route>
+        <Route path='/dashBoard' element={
+          <RequireAuth><DashBoard></DashBoard></RequireAuth>
+          <Route index element={}></Route>
+        }></Route>
         <Route path='/login' element={<Login></Login>}></Route>
         <Route path='/register' element={<Register></Register>}></Route>
       </Routes>

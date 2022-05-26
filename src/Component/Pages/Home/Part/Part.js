@@ -14,6 +14,7 @@ const Part = ({ service }) => {
         <img
           src={img}
           alt="parts img"
+          className="h-80"
         />
       </figure>
       <div class="card-body">
