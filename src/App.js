@@ -12,6 +12,8 @@ import 'react-toastify/dist/ReactToastify.css';
 import PartDetalis from './Component/Pages/Home/PartDetalis/PartDetalis';
 import RequireAuth from './hooks/RequireAuth';
 import DashBoard from './Component/Pages/DashBoard/DashBoard';
+import OrderReview from './Component/Pages/OrderReview/OrderReview';
+import ClientReview from './Component/Pages/OrderReview/ClientReview';
 
 
 function App() {
@@ -28,8 +30,11 @@ function App() {
         }></Route>
         <Route path='/dashBoard' element={
           <RequireAuth><DashBoard></DashBoard></RequireAuth>
-          <Route index element={}></Route>
-        }></Route>
+        }>
+          <Route index element={<OrderReview></OrderReview>}></Route>
+          <Route path='review' element={<ClientReview></ClientReview>}></Route>
+ 
+        </Route>
         <Route path='/login' element={<Login></Login>}></Route>
         <Route path='/register' element={<Register></Register>}></Route>
       </Routes>
