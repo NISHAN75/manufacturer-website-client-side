@@ -1,8 +1,8 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import {Tr, Td } from "react-super-responsive-table";
 
-const SingleOrder = ({ order ,index ,handleDelete }) => {
-  console.log(order);
+const SingleOrder = ({ order ,index ,setRemoveOrder }) => {
   
   return (
       <Tr className="p-20 hover:bg-primary hover:text-white font-bold border-b-4 border-primary">
@@ -11,7 +11,20 @@ const SingleOrder = ({ order ,index ,handleDelete }) => {
         <Td className="p-5">{order?.partName}</Td>
         <Td className="p-5">{order?.userPhone}</Td>
         <Td className="p-5">{order?.quantity}</Td>
-        <Td className="p-5"><button onClick={()=>handleDelete(order.partId)} class="btn btn-error px-10 hover:bg-white">Delete</button></Td>
+        <Td className="p-5">${order?.pay}</Td>
+        <Td className="p-5">
+        {
+        (order?.pay && !order?.paid) && <Link to={`/dashBoard/payment/${order?._id}`}><button class="btn btn-active  bg-primary hover:bg-white hover:text-black px-10">pay</button>
+        </Link>}
+        {
+        (order?.pay && order?.paid) && <Link to={``}><span className="text-success">paid</span>
+        </Link>}
+        </Td>
+        <Td className="p-5">
+        <label onClick={()=> setRemoveOrder(order)} for="order-delete-conform" class="btn  bg-red-500 hover:bg-white hover:text-black px-10">
+      Delete
+      </label>
+        </Td>
       </Tr>
   );
 };

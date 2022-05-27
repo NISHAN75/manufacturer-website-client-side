@@ -6,10 +6,12 @@ import { Table, Thead, Tbody, Tr, Th } from 'react-super-responsive-table';
 import 'react-super-responsive-table/dist/SuperResponsiveTableStyle.css';
 import SingleOrder from './SingleOrder';
 import { useNavigate } from 'react-router-dom';
+import OrderDelete from '../DeleteModal/OrderDelete';
 
 
 const OrderReview = () => {
   const [orders,setOrders] =useState([]);
+  const [removeOrder,setRemoveOrder]=useState(null);
   const [auth] =useAuth();
   const [user]=useAuthState(auth)
   const navigate = useNavigate();
@@ -38,27 +40,10 @@ const OrderReview = () => {
       }
     }
     ,[user]);
-    const handleDelete = (partId) => {
-      const agree = window.confirm("Are You sure want to Delete This Orders");
-      if (agree) {
-        console.log("click", partId);
-        const url = `http://localhost:5000/orders?email=${user.email}`;
-        fetch(url, {
-          method: "DELETE",
-        })
-          .then((res) => res.json())
-          .then((data) => {
-            if (data.deletedCount > 0) {
-              console.log('hi');
-              const remaining = orders.filter((order) => order.partId !== partId );
-              console.log(remaining);
-              setOrders(remaining);
-            }
-          });
-      }
-    };
+    
   return (
-    <div>
+    <section>
+      <div>
       <h1 className="text-center font-bold text-3xl text-primary mt-5">Your Order : {orders.length}</h1>
       <Table className="text-left px-5 mt-10">
       <Thead>
@@ -68,15 +53,25 @@ const OrderReview = () => {
           <Th>Parts Name</Th>
           <Th>Phone number</Th>
           <Th>Order Quantity</Th>
+          <Th>Payment</Th>
         </Tr>
       </Thead>
       <Tbody>
         {
-          orders.map((order,index) => <SingleOrder handleDelete={handleDelete} index={index} key={order._id} order={order}></SingleOrder>)
+          orders.map((order,index) => <SingleOrder index={index} key={order._id} setRemoveOrder={setRemoveOrder} order={order}></SingleOrder>)
         }
          </Tbody>
     </Table>
     </div>
+    {
+         removeOrder && <OrderDelete
+         orders={orders}
+         setRemoveOrder={setRemoveOrder}
+         setOrders={setOrders}
+         removeOrder={removeOrder}
+         ></OrderDelete>
+    }
+    </section>
   );
 };
 

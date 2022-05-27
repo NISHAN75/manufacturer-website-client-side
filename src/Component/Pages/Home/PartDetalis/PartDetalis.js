@@ -23,9 +23,11 @@ const PartDetalis = () => {
     handleSubmit,reset 
   } = useForm({mode: 'onChange'});
   const onSubmit = async(data) =>{
+    const presentQuantity=parseInt(data.quantity)
     const availableQuantity=parseInt(part.available)
     const minimumQuantity=parseInt(part.minimum)
     const inputQuantity=parseInt(data.quantity)
+    const totalPrice=inputQuantity * presentQuantity;
     if(minimumQuantity > inputQuantity ){
        return  alert('Please Enter minimum Order')
     }
@@ -39,7 +41,8 @@ const PartDetalis = () => {
         quantity: data.quantity,
         user:user?.displayName,
         userEmail:user?.email,
-        userPhone:data.phone
+        userPhone:data.phone,
+         pay: totalPrice
       }
       fetch('http://localhost:5000/orders',{
         method: 'POST',
@@ -53,7 +56,7 @@ const PartDetalis = () => {
         console.log(data);
         if(data.success){
           toast.success(`congratulations! Your ${part.name} parts Order Successfully`)
-          // navigate('/home')
+          navigate('/home')
         }
         else{
           toast.error(`This Order already declare!! 

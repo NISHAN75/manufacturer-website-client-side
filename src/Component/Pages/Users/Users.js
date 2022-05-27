@@ -8,7 +8,6 @@ import DeleteModal from '../DeleteModal/DeleteModal';
 
 const Users = () => {
   const [removeUser,setRemoveUser]=useState(null);
-  console.log(removeUser);
   const {data: users, isLoading,refetch} = useQuery('users', () => fetch('http://localhost:5000/user',{
    method: 'GET',
    headers:{
@@ -39,7 +38,11 @@ const Users = () => {
           </Table>
       </div>
       {
-        removeUser ? <DeleteModal></DeleteModal>: ''
+        removeUser && <DeleteModal
+        removeUser={removeUser}
+        refetch={refetch}
+        setRemoveUser={setRemoveUser}
+        ></DeleteModal>
       } 
     </section>
   );

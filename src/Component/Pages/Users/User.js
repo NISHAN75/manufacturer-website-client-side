@@ -25,27 +25,7 @@ const User = ({ user , index ,refetch,setRemoveUser }) => {
   })
 
   }
-  const handleDelete = (email) => {
-    const agree = window.confirm("Are You sure want to Delete This Orders");
-    if (agree) {
-      console.log("click", email);
-      const url = `http://localhost:5000/user/${user.email}`;
-      fetch(url, {
-        method: "DELETE",
-        headers:{
-          authorization: `Bearer ${localStorage.getItem('accessToken')}`
-        }
-      })
-        .then((res) => res.json())
-        .then((data) => {
-          if (data.deletedCount) {
-            toast.success('Remove This user')
-           refetch()
-            
-          }
-        });
-    }
-  };
+  
   return (
     <Tr className=" hover:bg-primary hover:text-white font-bold border-b-4 border-primary">
       <Th>{index + 1}</Th>
@@ -54,10 +34,10 @@ const User = ({ user , index ,refetch,setRemoveUser }) => {
           Make admin
         </button>}</Td>
       <Td class="p-8">
-      <label onClick={()=> setRemoveUser(user)} for="Delete-conform" class="btn btn-error btn-xs">
+      <label onClick={()=> setRemoveUser(user)} for="delete-conform" class="btn  bg-red-500 hover:bg-white hover:text-black">
       Remove User
       </label>
-        <button onClick={ () =>handleDelete(user.email)} class="btn bg-red-500  hover:bg-white hover:text-black">Remove User</button>
+       
       </Td>
     </Tr>
   );
