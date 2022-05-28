@@ -27,14 +27,8 @@ const AddReviews = () => {
           body: JSON.stringify(reviews)
         })
         .then(res => res.json())
-        .then(inserted=> {
-          if(inserted.insertedId){
-            toast.success('Your Review  Added Successfully')
-            reset();
-          }
-          else{
-            toast.error('Sorry! Did not add Review')
-          }
+        .then(data=> {
+          console.log(data)
         })
     // navigate("/home");
     reset();
