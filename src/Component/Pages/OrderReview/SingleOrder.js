@@ -14,16 +14,24 @@ const SingleOrder = ({ order ,index ,setRemoveOrder }) => {
         <Td className="p-5">${order?.pay}</Td>
         <Td className="p-5">
         {
-        (order?.pay && !order?.paid) && <Link to={`/dashBoard/payment/${order?._id}`}><button class="btn btn-active  bg-primary hover:bg-white hover:text-black px-10">pay</button>
-        </Link>}
+          ( order?.pay && !order?.paid) && <Link to={`/dashBoard/payment/${order?._id}`}>
+          <button class="btn btn-active  bg-primary hover:bg-white hover:text-black px-10">pay</button>
+        </Link>
+        }
         {
-        (order?.pay && order?.paid) && <Link to={``}><span className="text-success">paid</span>
-        </Link>}
+          (order?.pay && order?.paid) && <div>
+            <span className="text-secondary">Paid</span>
+            <p>Transaction id:<br/><span className="text-secondary">{order?.transactionId}</span></p>
+
+          </div>
+        } 
         </Td>
         <Td className="p-5">
-        <label onClick={()=> setRemoveOrder(order)} for="order-delete-conform" class="btn  bg-red-500 hover:bg-white hover:text-black px-10">
-      Delete
-      </label>
+        {
+           !order?.paid && <label onClick={()=> setRemoveOrder(order)} for="order-delete-conform" class="btn  bg-red-500 hover:bg-white hover:text-black px-10">
+           Delete
+           </label>
+        }
         </Td>
       </Tr>
   );

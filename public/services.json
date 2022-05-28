@@ -5,7 +5,7 @@
     "description":" I realize that two years is not a long time. I realize that even ten years is not a long time. But when it seems insurmountable",
     "minimum":"100",
     "available":"1000",
-    "price":"400"
+    "price":"20"
   },
   {
     "img":"https://images.pexels.com/photos/6502511/pexels-photo-6502511.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
@@ -13,47 +13,47 @@
     "description":"Mechanism for changing the front gears by lifting the chain from one chain wheel to another; it allows the cyclist to adapt to road conditions.",
     "minimum":"100",
     "available":"5000",
-    "price":"500"
+    "price":"40"
   },
   {
     "img":"https://743053-2497999-raikfcquaxqncofqfm.stackpathdns.com/wp-content/uploads/2021/12/Bike-Seat.jpg",
     "name":"Saddle",
     "description":"Set of metal links meshing with the sprockets on the chain wheel and gear wheel to transmit the pedaling motion to the rear wheel",
     "minimum":"100",
-    "available":"9800",
-    "price":"250"
+    "available":"2000",
+    "price":"25"
   },
   {
     "img":"https://743053-2497999-raikfcquaxqncofqfm.stackpathdns.com/wp-content/uploads/2021/12/Bicycle-Handlebar-1.jpg",
     "name":"Bicycle Handlebar",
     "description":"Tube connecting the pedal and crank mechanism to the rear-wheel hub.",
     "minimum":"100",
-    "available":"14000",
-    "price":"700"
+    "available":"4000",
+    "price":"35"
   },
   {
     "img":"https://743053-2497999-raikfcquaxqncofqfm.stackpathdns.com/wp-content/uploads/2021/12/Bicycle-fork.jpg",
     "name":"Bicycle Fork",
     "description":"Horizontal part of the frame, connecting the head tube with the seat tube and stabilizing the frame.",
     "minimum":"100",
-    "available":"7000",
-    "price":"350"
+    "available":"3000",
+    "price":"14"
   },
   {
     "img":"https://743053-2497999-raikfcquaxqncofqfm.stackpathdns.com/wp-content/uploads/2021/12/Bike-Wheel-Parts.jpg",
     "name":"Down tube",
     "description":"Part of the frame connecting the head tube to the pedal mechanism; it is the longest and thickest tube in the frame and gives it its rigidity.",
     "minimum":"100",
-    "available":"1000",
-    "price":"400"
+    "available":"2000",
+    "price":"35"
   },
   {
     "img":"https://743053-2497999-raikfcquaxqncofqfm.stackpathdns.com/wp-content/uploads/2021/12/Bicycle-Gear-Parts.jpg",
     "name":"Bicycle Gear Parts",
     "description":"The gear shifter is a hand lever attached to the handlebar. This allows you to shift gears via a cable that moves the derailleurs.",
     "minimum":"100",
-    "available":"1000",
-    "price":"400"
+    "available":"1500",
+    "price":"25"
   },
   {
     "img":"https://743053-2497999-raikfcquaxqncofqfm.stackpathdns.com/wp-content/uploads/2021/12/Bicycle-brake.jpg",
@@ -61,6 +61,6 @@
     "description":"I realize that two years is not a long time. I realize that even ten years is not a long time. But when it seems insurmountable",
     "minimum":"100",
     "available":"2500",
-    "price":"299"
+    "price":"29"
   }
 ]

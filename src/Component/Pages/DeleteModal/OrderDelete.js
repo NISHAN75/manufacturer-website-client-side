@@ -12,6 +12,9 @@ const OrderDelete = ({setRemoveOrder , setOrders ,removeOrder ,orders}) => {
       
       fetch(url, {
         method: "DELETE",
+        headers:{
+          'authorization': `Bearer ${localStorage.getItem('accessToken')}`
+        }
       })
         .then((res) => res.json())
         .then((data) => {
