@@ -18,6 +18,7 @@ import ClientReview from "./Component/Pages/OrderReview/ClientReview";
 import Profile from "./Component/Pages/Profile/Profile";
 import Users from "./Component/Pages/Users/Users";
 import Payment from "./Component/Pages/OrderReview/Payment";
+import AddReviews from "./Component/Pages/DashBoard/AddReviews/AddReviews";
 
 function App() {
   return (
@@ -42,6 +43,7 @@ function App() {
             </RequireAuth>
           }
         >
+          <Route path="review" element={<AddReviews></AddReviews>}></Route>
           <Route path="profile" element={<Profile></Profile>}></Route>
           <Route path="payment/:id" element={<Payment></Payment>}></Route>
           <Route

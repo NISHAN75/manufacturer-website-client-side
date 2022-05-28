@@ -1,70 +1,50 @@
-import React from 'react';
+import React from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
-import { toast } from 'react-toastify';
+import { toast } from "react-toastify";
 
-const Profile = () => {
+const AddReviews = () => {
+  const navigate = useNavigate();
   const {
     register,
     formState: { errors },
     reset,
     handleSubmit,
   } = useForm();
-
-  const imgStorageKey='1917252678d6bb9e9686c386e330234a';
-
   const onSubmit = async (data) => {
      console.log(data);
-     const image=data.image[0];
-     const formDate=new FormData();
-     formDate.append('image',image);
-     const url=`https://api.imgbb.com/1/upload?key=${imgStorageKey}`
-     fetch(url,{
-       method:'POST',
-       body: formDate
-     })
-     .then(res => res.json())
-     .then(result => {
-       if(result.success){
-         const img= result.data.url;
-         const myProfile={
-           name:data.name,
-           email:data.email,
-           fUrl:data.facebook,
-           lUrl:data.linkedin,
-           img:img
-         }
-
-        //  send to database
-        fetch('http://localhost:5000/profile',{
+    const reviews ={
+      name:data.name,
+      comment:data.comment,
+      ratting:data.ratting,
+      img:data.img
+    }
+    fetch('http://localhost:5000/reviews',{
           method:'POST',
           headers:{
             'authorization': `Bearer ${localStorage.getItem('accessToken')}`
           },
-          body: JSON.stringify(myProfile)
+          body: JSON.stringify(reviews)
         })
         .then(res => res.json())
         .then(inserted=> {
           if(inserted.insertedId){
-            toast.success('Profile information Added Successfully')
+            toast.success('Your Review  Added Successfully')
             reset();
           }
           else{
-            toast.error('Sorry! Did not add Profile')
+            toast.error('Sorry! Did not add Review')
           }
         })
-       }
-       console.log('imgdb',result);
-     })
-   
-    // reset();
+    // navigate("/home");
+    reset();
   };
   return (
     <div>
       <form onSubmit={handleSubmit(onSubmit)}>
         <div class="form-control w-80 max-w-xs">
           <label class="label">
-            <span class="label-text">Profile Name</span>
+            <span class="label-text">Name</span>
           </label>
           <input
           name="name"
@@ -88,90 +68,67 @@ const Profile = () => {
         </div>
         <div class="form-control w-80 max-w-xs">
           <label class="label">
-            <span class="label-text">Email Address</span>
+            <span class="label-text">Comment</span>
           </label>
-          <input
+          <textarea
             type="text"
-            placeholder="Enter Your email"
+            placeholder="Enter Your Comment"
             class="input input-bordered w-full"
-            {...register("email", {
+            {...register("comment", {
               required: {
                 value: true,
-                message: "email Required",
+                message: "comment Required",
               }
             })}
           />
-          {errors.email?.type === "required" && (
+          {errors.comment?.type === "required" && (
               <span class="label-text-alt text-red-500">
-                {errors.email.message}
+                {errors.comment.message}
               </span>
             )}
         </div>
         <div class="form-control w-80 max-w-xs">
           <label class="label">
-            <span class="label-text">Facebook url</span>
+            <span class="label-text">Ratting</span>
           </label>
           <input
-            type="text"
-            placeholder="Enter Your facebook url"
-            class="input input-bordered w-full"
-            {...register("facebook", {
-              required: {
-                value: true,
-                message: "facebook url Required",
-              }
-            })}
-          />
-          <label class="label">
-            {errors.facebook?.type === "required" && (
-              <span class="label-text-alt text-red-500">
-                {errors.facebook.message}
-              </span>
-            )}
-          </label>
-        </div>
-        <div class="form-control w-80 max-w-xs">
-          <label class="label">
-            <span class="label-text">Linkedin url</span>
-          </label>
-          <input
-            type="text"
+            type="number"
             placeholder="Enter Your Ratting"
             class="input input-bordered w-full"
-            {...register("linkedin", {
+            {...register("ratting", {
               required: {
                 value: true,
-                message: "linkedin Required",
+                message: "ratting Required",
               }
             })}
           />
           <label class="label">
-            {errors.linkedin?.type === "required" && (
+            {errors.ratting?.type === "required" && (
               <span class="label-text-alt text-red-500">
-                {errors.linkedin.message}
+                {errors.ratting.message}
               </span>
             )}
           </label>
         </div>
         <div class="form-control w-80 max-w-xs">
           <label class="label">
-            <span class="label-text">Your Photo</span>
+            <span class="label-text">Your img</span>
           </label>
           <input
-            type="file"
+            type="text"
             placeholder="Enter Your password"
             class="input input-bordered w-full"
-            {...register("image", {
+            {...register("img", {
               required: {
                 value: true,
-                message: "image Url Required",
+                message: "Url Required",
               }
             })}
           />
           <label class="label">
-            {errors.image?.type ==="required" && (
+            {errors.img?.type ==="required" && (
               <span class="label-text-alt text-red-500">
-                {errors.image.message}
+                {errors.img.message}
               </span>
             )}
           </label>
@@ -187,4 +144,4 @@ const Profile = () => {
   );
 };
 
-export default Profile;
+export default AddReviews;
