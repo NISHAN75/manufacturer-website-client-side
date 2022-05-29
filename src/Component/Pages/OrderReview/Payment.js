@@ -11,7 +11,6 @@ const stripePromise = loadStripe(
   "pk_test_51L3xaWGYUGMAfkTXqJ3dGUXCsSORicM7HiTbKukjhEaWLELhzJxkLisKWx1kFVAumZuShq52aP6IMRD4RxLFOMvX00ylsVqnmR"
 );
 
-
 const Payment = () => {
   const { id } = useParams();
 
@@ -29,13 +28,13 @@ const Payment = () => {
   console.log(order);
   return (
     <section className="my-12 lg:flex lg:justify-center lg:items-center gap-5 ">
-      <div class="card w-96 bg-base-100 shadow-xl mb-5">
-        <div class="card-body">
+      <div className="card w-max-lg bg-base-100 shadow-xl mb-5">
+        <div className="card-body">
           <p className="text-primary font-bold">
             <FaCat className="text-4xl" />
             Hello ! {order.user}
           </p>
-          <h2 class="card-title text-secondary font-bold text-xl">
+          <h2 className="card-title text-secondary font-bold text-xl">
             Your selected order : {order.partName}
           </h2>
           <p className="font-bold text-secondary text-xl">
@@ -43,8 +42,8 @@ const Payment = () => {
           </p>
         </div>
       </div>
-      <div class="card w-96 bg-base-100 shadow-xl">
-        <div class="card-body">
+      <div className="card w-max-lg bg-base-100 shadow-xl">
+        <div className="card-body">
           <Elements stripe={stripePromise}>
             <CheckoutForm order={order} />
           </Elements>

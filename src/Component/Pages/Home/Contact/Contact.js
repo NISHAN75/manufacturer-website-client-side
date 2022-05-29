@@ -3,8 +3,7 @@ import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
-const AddReviews = () => {
-  const navigate = useNavigate();
+const Contact = () => {
   const {
     register,
     formState: { errors },
@@ -12,29 +11,14 @@ const AddReviews = () => {
     handleSubmit,
   } = useForm();
   const onSubmit = async (data) => {
-    const reviews = {
-      name: data.name,
-      comment: data.comment,
-      ratting: data.ratting,
-      img: data.img,
-    };
-    fetch("http://localhost:5000/reviews", {
-      method: "POST",
-      headers: {
-        "content-type": "application/json",
-      },
-      body: JSON.stringify(reviews),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        console.log(data);
-        toast("Thanks For Your Review? review add Successfully");
-      });
     reset();
   };
   return (
-    <section>
-      <div>
+    <section className=" bg-primary p-5">
+      <h2 className="text-4xl font-bold mb-5 text-center text-white mt-5">
+        Contact Us
+      </h2>
+      <div className="flex justify-center items-center">
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="form-control w-80 max-w-xs">
             <label className="label">
@@ -62,83 +46,83 @@ const AddReviews = () => {
           </div>
           <div className="form-control w-80 max-w-xs">
             <label className="label">
-              <span className="label-text">Comment</span>
+              <span className="label-text">Message</span>
             </label>
             <textarea
               type="text"
-              placeholder="Enter Your Comment"
+              placeholder="Enter Your message"
               className="input input-bordered w-full"
-              {...register("comment", {
+              {...register("message", {
                 required: {
                   value: true,
-                  message: "comment Required",
+                  message: "message Required",
                 },
               })}
             />
-            {errors.comment?.type === "required" && (
+            {errors.message?.type === "required" && (
               <span className="label-text-alt text-red-500">
-                {errors.comment.message}
+                {errors.message.message}
               </span>
             )}
           </div>
           <div className="form-control w-80 max-w-xs">
             <label className="label">
-              <span className="label-text">Ratting</span>
+              <span className="label-text">Email</span>
             </label>
             <input
-              type="number"
-              placeholder="Enter Your Ratting"
+              type="email"
+              placeholder="Enter Your email"
               className="input input-bordered w-full"
-              {...register("ratting", {
+              {...register("email", {
                 required: {
                   value: true,
-                  message: "ratting Required",
+                  message: "email Required",
                 },
-                max: {
-                  value: 5,
-                  message: "Enter a valid ratting",
+                pattern: {
+                  value: /[a-z0-9]+@[a-z]+\.[a-z]{2,3}/,
+                  message: "Enter a valid Email",
                 },
               })}
             />
             <label className="label">
-              {errors.ratting?.type === "required" && (
+              {errors.email?.type === "required" && (
                 <span className="label-text-alt text-red-500">
-                  {errors.ratting.message}
+                  {errors.email.message}
                 </span>
               )}
-              {errors.ratting?.type === "max" && (
+              {errors.pattern?.type === "max" && (
                 <span className="label-text-alt text-red-500">
-                  {errors.ratting.message}
+                  {errors.pattern.message}
                 </span>
               )}
             </label>
           </div>
           <div className="form-control w-80 max-w-xs">
             <label className="label">
-              <span className="label-text">Your img url</span>
+              <span className="label-text">Your phone</span>
             </label>
             <input
-              type="text"
-              placeholder="Enter Your img url"
+              type="phone"
+              placeholder="Enter Your phone"
               className="input input-bordered w-full"
-              {...register("img", {
+              {...register("phone", {
                 required: {
                   value: true,
-                  message: "Url Required",
+                  message: "phone Required",
                 },
               })}
             />
             <label className="label">
-              {errors.img?.type === "required" && (
+              {errors.phone?.type === "required" && (
                 <span className="label-text-alt text-red-500">
-                  {errors.img.message}
+                  {errors.phone.message}
                 </span>
               )}
             </label>
           </div>
 
           <input
-            className="btn my-3 btn-primary px-10 w-full max-w-xs  text-white hover:bg-white hover:text-black"
+            className="btn my-3 bg-secondary px-10 w-full max-w-xs  text-white hover:bg-white hover:text-black"
             type="submit"
             value="Submit"
           />
@@ -148,4 +132,4 @@ const AddReviews = () => {
   );
 };
 
-export default AddReviews;
+export default Contact;

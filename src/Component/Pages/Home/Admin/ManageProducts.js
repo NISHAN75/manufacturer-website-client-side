@@ -1,13 +1,23 @@
 import React from "react";
+import { useAuthState } from "react-firebase-hooks/auth";
 import { toast } from "react-toastify";
+import useAdmin from "../../../../hooks/useAdmin";
+import useAuth from "../../../../hooks/useAuth";
 
-const OrderDelete = ({ setRemoveOrder, setOrders, removeOrder, orders }) => {
-  console.log(removeOrder);
-
-  const { userEmail, partName } = removeOrder;
-  const handleDelete = (partId) => {
-    console.log("click", partId);
-    const url = `http://localhost:5000/orders?email=${removeOrder.userEmail}`;
+const ManageProducts = ({
+  allProducts,
+  setDeleteProduct,
+  setAllProducts,
+  deleteProduct,
+}) => {
+  const { _id, name } = deleteProduct;
+  const [auth] = useAuth();
+  const [user] = useAuthState(auth);
+  const [admin] = useAdmin(user);
+  console.log(deleteProduct);
+  const handleDelete = (_id) => {
+    console.log("click", _id);
+    const url = `http://localhost:5000/services/${_id}`;
     console.log(url);
 
     fetch(url, {
@@ -20,10 +30,12 @@ const OrderDelete = ({ setRemoveOrder, setOrders, removeOrder, orders }) => {
       .then((data) => {
         if (data.deletedCount > 0) {
           console.log("hi");
-          const remaining = orders.filter((order) => order.partId !== partId);
+          const remaining = allProducts.filter(
+            (product) => product._id !== _id
+          );
           toast.success("Delete Successfully");
-          setRemoveOrder(null);
-          setOrders(remaining);
+          setDeleteProduct(null);
+          setAllProducts(remaining);
         }
       });
   };
@@ -31,25 +43,25 @@ const OrderDelete = ({ setRemoveOrder, setOrders, removeOrder, orders }) => {
     <div>
       <input
         type="checkbox"
-        id="order-delete-conform"
+        id="order-products-delete-conform"
         className="modal-toggle"
       />
       <div className="modal modal-bottom sm:modal-middle">
         <div className="modal-box">
           <h3 className="font-bold text-lg text-red-500">
             Are You Sure You Want to Delete
-            <br /> <span className="text-green-500">{partName}</span>?
+            <br /> <span className="text-green-500">{}</span>?
           </h3>
           <p className="py-4"></p>
           <div className="modal-action">
             <button
-              onClick={() => handleDelete(removeOrder.partId)}
+              onClick={() => handleDelete(deleteProduct?._id)}
               className="btn bg-red-500  hover:bg-white hover:text-black px-10"
             >
               Delete
             </button>
             <label
-              htmlFor="order-delete-conform"
+              htmlFor="order-products-delete-conform"
               className="btn bg-green-500   hover:bg-white hover:text-black px-10"
             >
               Cancel
@@ -61,4 +73,4 @@ const OrderDelete = ({ setRemoveOrder, setOrders, removeOrder, orders }) => {
   );
 };
 
-export default OrderDelete;
+export default ManageProducts;

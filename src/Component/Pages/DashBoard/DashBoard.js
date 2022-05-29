@@ -6,35 +6,55 @@ import useAuth from "../../../hooks/useAuth";
 
 const DashBoard = () => {
   const [auth] = useAuth();
-  const [user] =useAuthState(auth)
-  const [admin] =useAdmin(user)
+  const [user] = useAuthState(auth);
+  const [admin] = useAdmin(user);
   return (
-    <div class="drawer drawer-mobile">
-      <input id="dashBoard-sideBar" type="checkbox" class="drawer-toggle" />
-      <div class="drawer-content">
+    <div className="drawer drawer-mobile">
+      <input id="dashBoard-sideBar" type="checkbox" className="drawer-toggle" />
+      <div className="drawer-content">
         <h2 className="text-5xl text-primary justify-center font-bold text-center mt-5">
           Welcome Dashboard
         </h2>
         <Outlet></Outlet>
       </div>
-      <div class="drawer-side">
-        <label for="dashBoard-sideBar" class="drawer-overlay"></label>
-        <ul class="menu p-4 overflow-y-auto w-70 bg-base-100 text-base-content">
+      <div className="drawer-side">
+        <label htmlFor="dashBoard-sideBar" className="drawer-overlay"></label>
+        <ul className="menu p-4 overflow-y-auto w-70 bg-base-100 text-base-content">
           {/* <!-- Sidebar content here --> */}
-          <li className="text-primary font-bold   hover:text-black mr-3 p-2">
-            <Link to="/dashBoard">My Orders</Link>
-          </li>
-          <li className="text-primary font-bold    hover:text-black mr-3 p-2">
-            <Link to="/dashBoard/review">Add A Reviews</Link>
-          </li>
           <li className="text-primary font-bold    hover:text-black mr-3 p-2">
             <Link to="/dashBoard/profile">My Profile</Link>
           </li>
-         {
-            admin && <li className="text-primary font-bold    hover:text-black mr-3 p-2">
-            <Link to="/dashBoard/users">All User</Link>
-          </li>
-         }
+          {!admin && (
+            <li className="text-primary font-bold   hover:text-black mr-3 p-2">
+              <Link to="/dashBoard/orders">My Orders</Link>
+            </li>
+          )}
+          {!admin && (
+            <li className="text-primary font-bold    hover:text-black mr-3 p-2">
+              <Link to="/dashBoard/review">Add A Reviews</Link>
+            </li>
+          )}
+
+          {admin && (
+            <li className="text-primary font-bold    hover:text-black mr-3 p-2">
+              <Link to="/dashBoard/allOrders">Manage All Order</Link>
+            </li>
+          )}
+          {admin && (
+            <li className="text-primary font-bold    hover:text-black mr-3 p-2">
+              <Link to="/dashBoard/users">All User</Link>
+            </li>
+          )}
+          {admin && (
+            <li className="text-primary font-bold    hover:text-black mr-3 p-2">
+              <Link to="/dashBoard/products">Add a Product</Link>
+            </li>
+          )}
+          {admin && (
+            <li className="text-primary font-bold    hover:text-black mr-3 p-2">
+              <Link to="/dashBoard/allProducts">Manage Products</Link>
+            </li>
+          )}
         </ul>
       </div>
     </div>

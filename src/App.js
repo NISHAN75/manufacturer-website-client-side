@@ -19,6 +19,14 @@ import Profile from "./Component/Pages/Profile/Profile";
 import Users from "./Component/Pages/Users/Users";
 import Payment from "./Component/Pages/OrderReview/Payment";
 import AddReviews from "./Component/Pages/DashBoard/AddReviews/AddReviews";
+import AllOrders from "./Component/Pages/Home/Admin/AllOrders";
+import AddProducts from "./Component/Pages/Home/Admin/AddProducts";
+import AllProducts from "./Component/Pages/Home/Admin/AllProducts";
+import Blogs from "./Component/Pages/Home/Blogs/Blogs";
+import NotFound from "./Component/Pages/NotFound/NotFound";
+import PersonalProfile from "./Component/Pages/Home/Home/PersonalProfile/PersonalProfile";
+
+
 
 function App() {
   return (
@@ -43,8 +51,8 @@ function App() {
             </RequireAuth>
           }
         >
+          <Route index element={<Profile></Profile>}></Route>
           <Route path="review" element={<AddReviews></AddReviews>}></Route>
-          <Route path="profile" element={<Profile></Profile>}></Route>
           <Route path="payment/:id" element={<Payment></Payment>}></Route>
           <Route
             path="users"
@@ -54,11 +62,38 @@ function App() {
               </RequireAdmin>
             }
           ></Route>
-          <Route index element={<OrderReview></OrderReview>}></Route>
+          <Route
+            path="allOrders"
+            element={
+              <RequireAdmin>
+                <AllOrders></AllOrders>
+              </RequireAdmin>
+            }
+          ></Route>
+          <Route
+            path="products"
+            element={
+              <RequireAdmin>
+                <AddProducts></AddProducts>
+              </RequireAdmin>
+            }
+          ></Route>
+          <Route
+            path="allProducts"
+            element={
+              <RequireAdmin>
+                <AllProducts></AllProducts>
+              </RequireAdmin>
+            }
+          ></Route>
+          <Route path="orders" element={<OrderReview></OrderReview>}></Route>
           <Route path="review" element={<ClientReview></ClientReview>}></Route>
         </Route>
+        <Route path="/blog" element={<Blogs></Blogs>}></Route>
+        <Route path="/myProfile" element={<PersonalProfile></PersonalProfile>}></Route>
         <Route path="/login" element={<Login></Login>}></Route>
         <Route path="/register" element={<Register></Register>}></Route>
+        <Route path="*" element={<NotFound></NotFound>}></Route>
       </Routes>
       <Footer></Footer>
 
