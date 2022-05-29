@@ -129,14 +129,6 @@ const Header = () => {
               BLOG
             </Link>
           </li>
-          <li>
-            <Link
-              to="contact"
-              className="text-black font-bold hover:bg-emerald-400 active:bg-emerald-700 focus:outline-none focus:ring focus:ring-emerald-400  hover:text-white mr-3 p-2"
-            >
-              CONTACT
-            </Link>
-          </li>
           {user && (
             <li>
               <Link
