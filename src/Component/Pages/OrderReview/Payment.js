@@ -28,7 +28,7 @@ const Payment = () => {
   console.log(order);
   return (
     <section className="my-12 lg:flex lg:justify-center lg:items-center gap-5 ">
-      <div className="card w-max-lg bg-base-100 shadow-xl mb-5">
+      <div className="card w-96 bg-base-100 shadow-xl mb-5">
         <div className="card-body">
           <p className="text-primary font-bold">
             <FaCat className="text-4xl" />
