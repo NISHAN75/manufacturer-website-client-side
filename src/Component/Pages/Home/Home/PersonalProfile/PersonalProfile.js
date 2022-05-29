@@ -9,9 +9,9 @@ const PersonalProfile = () => {
           <h2 className="text-primary font-bold text-2xl"> My name: Nishan Das</h2>
           <p className="text-secondary">my email: <span className="text-primary text-xl">nishandas880@gmail.com</span></p>
           <p></p>
-          <div className="educational my-10">
-            <h2 className="text-center">educational background</h2>
-            <p>hi,I  am nishan das ,  I was complete my hsc and ssc and  now I read in degree 1st year in chattogram city colleage.</p>
+          <div className="educational font-bold  my-10">
+            <h2 className="text-center text-primary mb-5 text-3xl font-bold">educational background</h2>
+            <p className="text-primary ">hi,I  am nishan das ,  I was complete my hsc and ssc and  now I read in degree 1st year in chattogram city colleage.</p>
           </div>
           <div className="developer">
             <h2 className=" text-primary my-4">web developer technologies or skills</h2>

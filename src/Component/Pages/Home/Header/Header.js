@@ -113,12 +113,7 @@ const Header = () => {
             </Link>
           </li>
           <li>
-            <Link
-              to="/about"
-              className="text-black font-bold hover:bg-emerald-400 active:bg-emerald-700 focus:outline-none focus:ring focus:ring-emerald-400  hover:text-white mr-3 p-2"
-            >
-              ABOUT
-            </Link>
+            
             <Link
               to="/myProfile"
               className="text-black font-bold hover:bg-emerald-400 active:bg-emerald-700 focus:outline-none focus:ring focus:ring-emerald-400  hover:text-white mr-3 p-2"

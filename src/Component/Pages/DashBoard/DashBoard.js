@@ -22,7 +22,7 @@ const DashBoard = () => {
         <ul className="menu p-4 overflow-y-auto w-70 bg-base-100 text-base-content">
           {/* <!-- Sidebar content here --> */}
           <li className="text-primary font-bold    hover:text-black mr-3 p-2">
-            <Link to="/dashBoard/profile">My Profile</Link>
+            <Link to="/dashBoard/profile">Profile</Link>
           </li>
           {!admin && (
             <li className="text-primary font-bold   hover:text-black mr-3 p-2">
