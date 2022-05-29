@@ -18,7 +18,7 @@ const AddReviews = () => {
       ratting: data.ratting,
       img: data.img,
     };
-    fetch("http://localhost:5000/reviews", {
+    fetch("https://secret-coast-72696.herokuapp.com/reviews", {
       method: "POST",
       headers: {
         "content-type": "application/json",

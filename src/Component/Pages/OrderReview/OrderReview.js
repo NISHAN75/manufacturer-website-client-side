@@ -16,7 +16,7 @@ const OrderReview = () => {
   const navigate = useNavigate();
   useEffect(() => {
     if (user) {
-      const url = `http://localhost:5000/orders?email=${user.email}`;
+      const url = `https://secret-coast-72696.herokuapp.com/orders?email=${user.email}`;
       fetch(url, {
         method: "Get",
         headers: {

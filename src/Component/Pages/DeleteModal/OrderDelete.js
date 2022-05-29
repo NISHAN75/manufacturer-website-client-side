@@ -7,7 +7,7 @@ const OrderDelete = ({ setRemoveOrder, setOrders, removeOrder, orders }) => {
   const { userEmail, partName } = removeOrder;
   const handleDelete = (partId) => {
     console.log("click", partId);
-    const url = `http://localhost:5000/orders?email=${removeOrder.userEmail}`;
+    const url = `https://secret-coast-72696.herokuapp.com/orders?email=${removeOrder.userEmail}`;
     console.log(url);
 
     fetch(url, {

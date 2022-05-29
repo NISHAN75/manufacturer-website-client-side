@@ -41,7 +41,7 @@ const Profile = () => {
           };
 
           //  send to database
-          fetch("http://localhost:5000/profile", {
+          fetch("https://secret-coast-72696.herokuapp.com/profile", {
             method: "POST",
             headers: {
               "content-type": "application/json",
@@ -197,7 +197,6 @@ const Profile = () => {
             value="Submit"
           />
         </form>
-        
       </div>
     </section>
   );

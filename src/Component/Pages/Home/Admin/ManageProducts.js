@@ -17,7 +17,7 @@ const ManageProducts = ({
   console.log(deleteProduct);
   const handleDelete = (_id) => {
     console.log("click", _id);
-    const url = `http://localhost:5000/services/${_id}`;
+    const url = `https://secret-coast-72696.herokuapp.com/services/${_id}`;
     console.log(url);
 
     fetch(url, {

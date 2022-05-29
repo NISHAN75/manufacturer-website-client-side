@@ -10,7 +10,7 @@ const MangeModal = ({
   const { userEmail, partName, _id } = removeOrder;
   const handleDelete = (partId) => {
     console.log("click", partId);
-    const url = `http://localhost:5000/allOrders/${_id}`;
+    const url = `https://secret-coast-72696.herokuapp.com/allOrders/${_id}`;
     console.log(url);
 
     fetch(url, {

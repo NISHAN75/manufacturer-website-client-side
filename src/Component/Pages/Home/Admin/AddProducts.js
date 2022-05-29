@@ -20,7 +20,7 @@ const AddProducts = () => {
       name: data.name,
       price: data.price,
     };
-    fetch("http://localhost:5000/services", {
+    fetch("https://secret-coast-72696.herokuapp.com/services", {
       method: "POST",
       headers: {
         "content-type": "application/json",

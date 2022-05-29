@@ -7,7 +7,6 @@ import "react-super-responsive-table/dist/SuperResponsiveTableStyle.css";
 import AllOrder from "./AllOrder";
 import MangeModal from "./MangeModal";
 
-
 const AllOrders = () => {
   const [auth] = useAuth();
   const [user] = useAuthState(auth);
@@ -17,7 +16,7 @@ const AllOrders = () => {
 
   useEffect(() => {
     if (admin) {
-      const url = "http://localhost:5000/allOrders";
+      const url = "https://secret-coast-72696.herokuapp.com/allOrders";
       fetch(url, {
         method: "Get",
         headers: {
@@ -32,32 +31,38 @@ const AllOrders = () => {
   }, [admin]);
   return (
     <section>
-      <h2 className="text-center font-bold mt-5 text-primary text-4xl">All Order : {allOrders.length}</h2>
+      <h2 className="text-center font-bold mt-5 text-primary text-4xl">
+        All Order : {allOrders.length}
+      </h2>
       <Table className="text-left my-10">
-      <Thead>
-            <Tr className="bg-primary text-white uppercase">
-              <Th>S.L</Th>
-              <Th>User</Th>
-              <Th>Parts Name</Th>
-              <Th>Phone number</Th>
-              <Th>Order Quantity</Th>
-              <Th>Payment</Th>
-            </Tr>
-          </Thead>
-      <Tbody>
-        {
-          allOrders.map((order,index) => <AllOrder setRemoveOrder={setRemoveOrder} index={index} order={order}></AllOrder>)
-        }
-      </Tbody>
-    </Table>
-    {
-      removeOrder && <MangeModal
-      allOrders={allOrders}
-      setRemoveOrder={setRemoveOrder}
-      setAllOrders={setAllOrders}
-      removeOrder={removeOrder}
-      ></MangeModal>
-    }
+        <Thead>
+          <Tr className="bg-primary text-white uppercase">
+            <Th>S.L</Th>
+            <Th>User</Th>
+            <Th>Parts Name</Th>
+            <Th>Phone number</Th>
+            <Th>Order Quantity</Th>
+            <Th>Payment</Th>
+          </Tr>
+        </Thead>
+        <Tbody>
+          {allOrders.map((order, index) => (
+            <AllOrder
+              setRemoveOrder={setRemoveOrder}
+              index={index}
+              order={order}
+            ></AllOrder>
+          ))}
+        </Tbody>
+      </Table>
+      {removeOrder && (
+        <MangeModal
+          allOrders={allOrders}
+          setRemoveOrder={setRemoveOrder}
+          setAllOrders={setAllOrders}
+          removeOrder={removeOrder}
+        ></MangeModal>
+      )}
     </section>
   );
 };

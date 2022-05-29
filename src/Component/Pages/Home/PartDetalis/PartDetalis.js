@@ -10,7 +10,7 @@ const PartDetalis = () => {
   const navigate = useNavigate();
   const [part, setPart] = useState([]);
   useEffect(() => {
-    const url = `http://localhost:5000/services/${id}`;
+    const url = `https://secret-coast-72696.herokuapp.com/services/${id}`;
     fetch(url)
       .then((res) => res.json())
       .then((data) => setPart(data));
@@ -46,7 +46,7 @@ const PartDetalis = () => {
         userPhone: data.phone,
         pay: totalPrice,
       };
-      fetch("http://localhost:5000/orders", {
+      fetch("https://secret-coast-72696.herokuapp.com/orders", {
         method: "POST",
         headers: {
           "content-type": "application/json",
